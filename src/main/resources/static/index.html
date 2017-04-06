@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ul, li {
+	list-style-type: none;
+	margin: 10px;
+}
+
+input {
+	width: 60%;
+}
+</style>
+<script src="/js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<form action="/uptoken/cover_file_name" enctype="multipart/form-data"
+		method="post">
+		<ul>
+			<li>
+				<label for="bucket" style="margin-top: 10px;">bucket：</label>
+				<input id="bucket" name="bucket" class="ipt" value="">
+			</li>
+			<li>
+				<label for="accessKey">accessKey：</label>
+				<input id="accessKey" name="accessKey" class="ipt" value="">
+			</li>
+			<li>
+				<label for="secretKey">secretKey：</label> 
+				<input id="secretKey" name="secretKey" class="ipt" value="">
+			</li>
+			<li>
+				<label for="key">key:</label> 
+				<input id="key" name="key" class="ipt" value="">
+			</li>
+			<li>
+				<label for="expires">deadline:</label> 
+				<input id="expires" name="expires" class="ipt" value="">
+			</li>
+			<li>
+				<button id="btn_upload">生成uploadToken</button>
+			</li>
+			<li>
+				<label for="upload_token">uploadToken:</label> 
+				<input id="upload_token" name="upload_token" class="ipt" value="">
+			</li>
+			<li>
+				<label for="bucket">照片:</label> 
+				<input id="file" name="file"
+				class="ipt" type="file" /></li>
+			<li>
+				<input id="btn_upload" type="button" value="提交">
+			</li>
+			<!-- <div id="progressbar">
+				<div class="progress-label"></div>
+			</div> -->
+		</ul>
+		<div id="dialog" title="上传成功"></div> 
+		
+	</form>
+
+	<!--直传文件 -->
+	<!-- <form method="post" action="/uptoken" enctype="multipart/form-data">
+		<input name="key" type="hidden" value="<resource_key>"> <input
+			name="x:<custom_name>" type="hidden" value="<custom_value>">
+		<input name="token" type="hidden" value="<upload_token>"> <input
+			name="file" type="file" /> <input name="crc32" type="hidden" /> <input
+			name="accept" type="hidden" />
+	</form> -->
+	<script>
+		$("#btn_upload").click(function() {
+			event.preventDefault();
+			var bucket = $("#bucket").val();
+			var accessKey = $("#accessKey").val();
+			var secretKey = $("#secretKey").val();
+			var key = $("#key").val();
+			//var expires = $("#expires").val();
+		
+			/*  $.post("/uptoken/simple_uptoken", {
+				bucket : "bucket",
+				accessKey : "accessKey",
+				secretKey : "secretKey",
+				//key: "key",
+				//expireSeconds: "expireSeconds"
+			}, function(resp) {
+				// var result = JSON.stringify(resp); 
+				$("#upload_token").val(resp.data);
+			})  */
+ 			
+			$.ajax({
+				  type: 'POST',
+				  url: "/uptoken/cover_file_name",
+				  data: {
+					  	bucket : "bucket",
+						accessKey : "accessKey",
+						secretKey : "secretKey",
+						key: "key",
+						//expires: "expires"
+				  },
+				  success: function(resp) {
+						// var result = JSON.stringify(resp); 
+						//alert("ok!");
+						$("#upload_token").val(resp.data);
+					}});
+		});
+	</script>
+</body>
+</html>

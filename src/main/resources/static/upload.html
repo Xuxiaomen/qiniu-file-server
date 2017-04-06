@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery-1.11.3.min.js"></script>
+<style>
+ul, li {
+	list-style-type: none;
+	margin: 10px;
+}
+
+input {
+	width: 60%;
+}
+</style>
+</head>
+<body>
+	<form method="post" action="http://up-z2.qiniu.com"
+		enctype="multipart/form-data" id="form_upload">
+		<ul>
+			<!-- 			<li><input name="key" type="hidden" value="<resource_key>"></li> -->
+			<!-- 			<li><input name="x:<custom_name>" type="hidden" -->
+			<!-- 				value="<custom_value>"></li> -->
+
+					<!-- 	 <li><label for="accessKey">accessKey：</label> <input
+							id="accessKey" name="accessKey" class="ipt" value=""></li>
+
+						<li><label for="secretKey">secretKey：</label> <input
+							id="secretKey" name="secretKey" class="ipt" value=""></li>
+
+						<li><label for="bucket">bucket：</label> <input id="bucket"
+							name="bucket" class="ipt" value=""></li>  -->
+
+						<!-- <li><label for="key">key:</label> <input id="key" name="key"
+							class="ipt" value=""></li>   -->
+
+						<!--  <li><input id="btn_upload" type="button" value="生成uploadToken"> 
+			 			</li> -->
+
+			<li><label for="upload_token">uploadToken:</label> <input
+				name="token" type="text" id="upload_token"></li>
+
+			<li><label for="bucket">照片:</label> <input name="file"
+				type="file" id="file" /></li>
+
+			<!-- <li><input name="crc32" type="hidden"  /></li> -->
+			<!-- 			<li><input name="accept" type="hidden" /></li> -->
+			<li><input type="submit" value="提交" id="submit" disabled="disabled"></li>
+		</ul>
+
+
+	</form>
+	<script>
+		 $(function() {
+			$.ajax({
+				type : 'POST',
+				url : "/uptoken/reply/policy",
+				data : {
+					bucket : "bucket01",
+					accessKey : "sSQvardFGUEYXQEoDgstVqnR0JqwA4cTT2lR-rGh",
+					secretKey : "e-hiyeOBJHxD3BS5Y2GM9CMCJl1mQ7a6pYE6Y35l",
+					//key: "games.jpg",
+				},
+				success : function(resp) {
+					$("#upload_token").val(resp.data);
+					
+					$('#submit').removeAttr("disabled");
+					/* $.post("http://upload.qiniu.com/", {
+						file : file,
+						token : resp.data
+					});
+					console.log("qiniu")*/
+				}
+			})
+		})  
+			 /* $("#btn_upload").click(function() {
+				event.preventDefault();
+				var bucket = $("#bucket").val();
+				var accessKey = $("#accessKey").val();
+				var secretKey = $("#secretKey").val();
+				//var key = $("#key").val();
+				var formData = new FormData($("#form_upload")[0]);
+		 		$.ajax({
+		 				type : 'POST',
+		 				url : "/uptoken/simple_uptoken",
+						data : {
+		 					bucket : bucket,
+							accessKey : accessKey,
+							secretKey : secretKey,
+		 					//key : key
+						},
+		 				success : function(resp) {
+		 					$("#upload_token").val(resp.data);
+		 					 $.post("http://up-z2.qiniu.com", {
+		 						file : formData,
+								token : resp.data
+		 					});
+		 					console.log("qiniu") 
+		 				}
+		 			});
+		 		});   */
+
+	</script>
+</body>
+</html>
