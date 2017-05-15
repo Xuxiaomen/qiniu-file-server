@@ -205,7 +205,7 @@ public final class AuthUtils {
      * @return 生成的上传token
      */
     public String uploadToken(String bucket) {
-        return uploadToken(bucket, null, 3600, null, false);
+        return uploadToken(bucket, null, 3600, null, true);
     }
 
     /**
@@ -218,7 +218,7 @@ public final class AuthUtils {
      * @return 生成的上传token
      */
     public String uploadToken(String bucket, String key) {
-        return uploadToken(bucket, key, 3600, null, false);
+        return uploadToken(bucket, key, 3600, null, true);
     }
 
     /**

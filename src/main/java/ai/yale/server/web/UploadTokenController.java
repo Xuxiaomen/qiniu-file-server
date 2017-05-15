@@ -8,7 +8,6 @@ import com.qiniu.util.StringMap;
 
 import ai.yale.server.service.UploadTokenService;
 import ai.yale.server.utils.RespMessage;
-import ai.yale.server.vo.PutPolicyVo;
 
 @RestController
 public class UploadTokenController {
@@ -17,48 +16,37 @@ public class UploadTokenController {
 	UploadTokenService uploadTokenService;
 	
 	@RequestMapping(value = "/uptoken/simple_uptoken")
-	/**
-	 * 简单上传的凭证
-	 * @param bucket
-	 * @param accessKey
-	 * @param secretKey
-	 * @return
-	 */
-	public RespMessage uploadToken(String bucket, String accessKey, String secretKey) {
+	public RespMessage uploadToken(String bucket,String accessKey,String secretKey) {
 		
 		return uploadTokenService.uploadToken(bucket, accessKey, secretKey);
 		
 	}
 	
 	@RequestMapping(value = "/uptoken/cover_file_name")
-	/**
-	 * 覆盖上传的凭证
-	 * @param bucket
-	 * @param accessKey
-	 * @param secretKey
-	 * @param key
-	 * @return
-	 */
-	public RespMessage uploadToken(String bucket, String accessKey, String secretKey, String key) {
+	public RespMessage uploadToken(String bucket,String accessKey,String secretKey, String key) {
 		
 		return uploadTokenService.uploadToken(bucket, accessKey, secretKey, key);
 		
 	}
 	
 	@RequestMapping(value = "/uptoken/reply/policy")
-	/**
-	 * 自定义上传回复的凭证
-	 * @param bucket
-	 * @param accessKey
-	 * @param secretKey
-	 * @param key
-	 * @param expires
-	 * @param policy
-	 * @return
-	 */
-	public RespMessage uploadTokenWith(String bucket, String accessKey, String secretKey, PutPolicyVo vo) {
+	public RespMessage uploadTokenWith(String bucket, String accessKey, String secretKey, String key, long expires, StringMap policy) {
 		
-		return uploadTokenService.uploadTokenWithPolicy(accessKey, secretKey, vo);
+		//return uploadTokenService.uploadTokenWithDeadline(bucket, accessKey, secretKey, key, expireSeconds,null);
+		return uploadTokenService.uploadToken(bucket, accessKey, secretKey, key, expires, policy);
 		
 	}
+	
+	@RequestMapping(value = "/uptoken/reply/strict")
+	public RespMessage uploadToken(String bucket, String accessKey, String secretKey, String key, long expires, StringMap policy, boolean strict) {
+		
+		return uploadTokenService.uploadToken(bucket, accessKey, secretKey, key, expires, policy, true);
+		
+	}
+	
+//	@RequestMapping(value = "/uptoken/reply/putpolicy_vo")
+//	public RespMessage uploadTokenWithPolicy(String accessKey, String secretKey, PutPolicyVo vo) {
+//		return uploadTokenService.uploadTokenWithPolicy(accessKey, secretKey, vo);
+//		
+//	}
 }

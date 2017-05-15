@@ -3,7 +3,7 @@ package ai.yale.server.vo;
 public class PutPolicyVo {
 
 	private String scope;
-	private Long expires;
+	private Long deadline;
 	private String returnBody;
 	public String getScope() {
 		return scope;
@@ -11,11 +11,11 @@ public class PutPolicyVo {
 	public void setScope(String scope) {
 		this.scope = scope;
 	}
-	public Long getExpires() {
-		return expires;
+	public Long getDeadline() {
+		return deadline;
 	}
-	public void setExpires(Long expires) {
-		this.expires = expires;
+	public void setDeadline(Long deadline) {
+		this.deadline = deadline;
 	}
 	public String getReturnBody() {
 		return returnBody;
@@ -25,7 +25,7 @@ public class PutPolicyVo {
 	}
 	@Override
 	public String toString() {
-		return "PutPolicyVo [scope=" + scope + ", expires=" + expires + ", returnBody=" + returnBody + "]";
+		return "PutPolicyVo [scope=" + scope + ", deadline=" + deadline + ", returnBody=" + returnBody + "]";
 	}
 	
 }

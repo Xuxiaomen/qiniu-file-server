@@ -16,7 +16,7 @@ input {
 <script src="/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-	<form action="/uptoken/cover_file_name" enctype="multipart/form-data"
+	<form action="" enctype="multipart/form-data"
 		method="post">
 		<ul>
 			<li>
@@ -36,8 +36,8 @@ input {
 				<input id="key" name="key" class="ipt" value="">
 			</li>
 			<li>
-				<label for="expires">deadline:</label> 
-				<input id="expires" name="expires" class="ipt" value="">
+				<label for="expireSeconds">deadline:</label> 
+				<input id="expireSeconds" name="expireSeconds" class="ipt" value="">
 			</li>
 			<li>
 				<button id="btn_upload">生成uploadToken</button>
@@ -75,8 +75,8 @@ input {
 			var bucket = $("#bucket").val();
 			var accessKey = $("#accessKey").val();
 			var secretKey = $("#secretKey").val();
-			var key = $("#key").val();
-			//var expires = $("#expires").val();
+			//var key = $("#key").val();
+			//var expireSeconds = $("#expireSeconds").val();
 		
 			/*  $.post("/uptoken/simple_uptoken", {
 				bucket : "bucket",
@@ -91,13 +91,13 @@ input {
  			
 			$.ajax({
 				  type: 'POST',
-				  url: "/uptoken/cover_file_name",
+				  url: "",
 				  data: {
 					  	bucket : "bucket",
 						accessKey : "accessKey",
 						secretKey : "secretKey",
 						key: "key",
-						//expires: "expires"
+						expireSeconds: "expireSeconds"
 				  },
 				  success: function(resp) {
 						// var result = JSON.stringify(resp); 
